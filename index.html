@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" x-data="pizzaCart()">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Pamphlet App</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.5.2/dist/cdn.min.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <div class="title">
+            <h1>Perfect Pizza</h1>
+        </div>
+
+        <section class="pizzas">
+            <section class="piz pizza">
+                <img src="assets/pizza.png" alt="Pizza picture" />
+                <h2>Large Pizza</h2>
+                <h3>R87.99</h3>
+                <p>
+                    Large Margherita pizza with 3 toppings max. 2 or less meat toppings. 3 or less other toppings.
+                </p>
+                <button @click="addToCart('large')">Buy</button>
+            </section>
+            <section class="piz pizza-1">
+                <img src="assets/pizza-1.png" alt="Pizza picture" />
+                <h2>Medium Pizza</h2>
+                <h3>R58.99</h3>
+                <p>
+                    Medium Margherita pizza with 3 toppings max. 3 meat toppings max. 3 or less other toppings.
+                </p>
+                <button @click="addToCart('medium')">Buy</button>
+            </section>
+            <section class="piz pizza-2">
+                <img src="assets/pizza-2.png" alt="Pizza picture" />
+                <h2>Small Pizza</h2>
+                <h3>R31.99</h3>
+                <p>
+                    Small pizza with 3 toppings<br>
+                    1 meat topping.<br>
+                    3 or less other toppings.<br>
+                </p>
+                <button @click="addToCart('small')">Buy</button>
+            </section>
+        </section>
+
+        <section class="cart">
+            <h2>Shopping Cart</h2>
+            <div>
+                <label>
+                    Small: R31.99 (Qty: <span x-text="cart.small"></span>)
+                    <button @click="removeFromCart('small')" x-show="cart.small > 0">Remove</button>
+                    <button @click="addToCart('small')" x-show="cart.small > 0">Add</button>
+                </label>
+                <br>
+                <label>
+                    Medium: R58.99 (Qty: <span x-text="cart.medium"></span>)
+                    <button @click="removeFromCart('medium')" x-show="cart.medium > 0">Remove</button>
+                    <button @click="addToCart('medium')" x-show="cart.medium > 0">Add</button>
+                </label>
+                <br>
+                <label>
+                    Large: R87.99 (Qty: <span x-text="cart.large"></span>)
+                    <button @click="removeFromCart('large')" x-show="cart.large > 0">Remove</button>
+                    <button @click="addToCart('large')" x-show="cart.large > 0">Add</button>
+                </label>
+                <br>
+                <div>Total cost: R<span x-text="totalCost.toFixed(2)"></span></div>
+                <button @click="checkout()" x-show="totalCost > 0">Check out</button>
+            </div>
+        </section>
+
+        <section class="payment" x-show="isCheckout">
+            <h2>Payment Amount</h2>
+            <input type="number" x-model="paymentAmount" placeholder="Enter payment amount">
+            <button @click="makePayment()">Pay</button>
+            <div x-text="paymentMessage"></div>
+        </section>
+
+        <section class="contact">
+            <div class="details">
+                <p>Contact us at 011 234 7658 <br> info@pizzaperfect.co.za<br> X:@pizzaperfect
+                    <br>Instagram:@pizzaperfect
+                </p>
+            </div>
+            <div class="address">
+                <p>Pizza Box <br> 123 Box CP <br> South Africa</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function pizzaCart() {
+            return {
+                cart: { small: 0, medium: 0, large: 0 },
+                paymentAmount: 0,
+                paymentMessage: '',
+                isCheckout: false,
+                prices: { small: 31.99, medium: 58.99, large: 87.99 },
+                get totalCost() {
+                    return this.cart.small * this.prices.small +
+                           this.cart.medium * this.prices.medium +
+                           this.cart.large * this.prices.large;
+                },
+                addToCart(size) {
+                    this.cart[size]++;
+                },
+                removeFromCart(size) {
+                    if (this.cart[size] > 0) {
+                        this.cart[size]--;
+                    }
+                },
+                checkout() {
+                    this.paymentMessage = '';
+                    this.isCheckout = true;
+                },
+                makePayment() {
+                    if (this.paymentAmount >= this.totalCost) {
+                        this.paymentMessage = 'Enjoy your pizzas!';
+                        this.cart = { small: 0, medium: 0, large: 0 };
+                        this.paymentAmount = 0;
+                        
+                    } else {
+                        this.paymentMessage = 'Sorry - that is not enough money!';
+                    }
+                    setTimeout(() => this.paymentMessage = '', 3000);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

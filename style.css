@@ -1,0 +1,130 @@
+body{
+    background-color: #3a86ff;
+    font-family:sans-serif
+}
+
+.title{
+    text-align: center;
+    margin: 1em;
+    border: 1px solid white;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+.piz{
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 1em;
+    border: 1px solid;
+    flex: 1;
+}
+
+.pizza{
+    background-color: #ff006e;
+    
+}
+
+.pizza-1{
+    background-color: #fb5607;
+   
+}
+.pizza-2{
+    background-color: #ffbe0b;
+    
+}
+
+.contact{
+    background-color: #8338ec;
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 10px;
+}
+
+.details{
+    flex: 1;
+}
+
+.address{
+    text-align: right;
+    flex: 1; 
+}
+
+
+@media (min-width:960px){
+    .pizzas{
+        display: flex;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+main > div {
+    margin-bottom: 20px;
+}
+
+button {
+    margin-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.message {
+    margin-top: 10px;
+    font-weight: bold;
+    color: red;
+}
+
+button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.cart {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: wheat;
+}
+
+.cart ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart li {
+    margin-bottom: 10px;
+}
+
+.cart div {
+    margin-top: 10px;
+}
+.payment{
+    border-color: white;
+    border: 1px solid;
+    padding: 10px;
+}
