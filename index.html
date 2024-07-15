@@ -99,6 +99,7 @@
                 paymentAmount: 0,
                 paymentMessage: '',
                 isCheckout: false,
+                change: 0,
                 prices: { small: 31.99, medium: 58.99, large: 87.99 },
                 get totalCost() {
                     return this.cart.small * this.prices.small +
@@ -119,9 +120,10 @@
                 },
                 makePayment() {
                     if (this.paymentAmount >= this.totalCost) {
-                        this.paymentMessage = 'Enjoy your pizzas!';
+                        this.change = this.paymentAmount - this.totalCost
                         this.cart = { small: 0, medium: 0, large: 0 };
                         this.paymentAmount = 0;
+                        this.paymentMessage = `Enjoy your pizzas! Your change is R${this.change.toFixed(2)}`;
                         
                     } else {
                         this.paymentMessage = 'Sorry - that is not enough money!';
